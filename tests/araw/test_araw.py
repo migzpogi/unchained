@@ -15,13 +15,13 @@ class TestAraw(unittest.TestCase):
                                    datetime.datetime))
 
 
-    def test_get_simple_manila_date_return_type(self):
+    def test_get_simple_date_return_type(self):
         """
         Tests if the return type is string
         :return:
         """
         a = Araw()
-        self.assertTrue(isinstance(a.get_simple_manila_date(),
+        self.assertTrue(isinstance(a.get_simple_date(),
                                    str))
 
 
