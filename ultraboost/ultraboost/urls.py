@@ -18,6 +18,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('ultraboost/', include('ilan.urls')),
-    path('paskoba/', include('paskoba.urls')),
+    path('today/', include('paskoba.urls')),
     path('admin/', admin.site.urls)
 ]
