@@ -14,7 +14,6 @@ class TestAraw(unittest.TestCase):
         self.assertTrue(isinstance(a.get_current_date_with_tz('Asia/Manila'),
                                    datetime.datetime))
 
-
     def test_get_simple_date_return_type(self):
         """
         Tests if the return type is string
@@ -23,6 +22,16 @@ class TestAraw(unittest.TestCase):
         a = Araw()
         self.assertTrue(isinstance(a.get_simple_date(),
                                    str))
+
+    def test_is_today_christmas(self):
+        """
+        Tests is_today_christmas
+        :return:
+        """
+        a = Araw()
+        expected = False, 99.73
+        actual = a.is_today_christmas()
+        self.assertEqual(expected, actual)
 
 
 if __name__ == '__main__':

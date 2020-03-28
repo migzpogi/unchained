@@ -24,3 +24,14 @@ class Araw(object):
 
         manila = self.get_current_date_with_tz(time_zone)
         return f'{manila.month}-{manila.day}-{manila.year}  {manila.hour}:{manila.minute}'
+
+    @staticmethod
+    def is_today_christmas():
+        """
+        Checks if it is Christmas day
+        :return tuple: this always returns False with its accuracy (False, x%)
+        """
+
+        accuracy = round((364/365) * 100, 2)
+        return False, accuracy
+

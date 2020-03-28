@@ -1,12 +1,14 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-from django.template import loader
-from django.shortcuts import render
 from .lib.araw import Araw
+
+def christmas_context():
+    christmas = Araw().is_today_christmas()
+    return {
+        'status': 'Hindi.',
+        'accuracy': f'{christmas[1]}% accurate'
+    }
 
 
 def index(request):
-    context = {
-        'sample_text': Araw().get_simple_date()
-    }
+    context = christmas_context()
     return render(request, 'paskoba/index.html', context)
