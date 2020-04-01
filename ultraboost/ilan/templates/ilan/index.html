@@ -1,5 +1,18 @@
+{% load static %}
 <html>
 <body>
-<h1>Hello World</h1>
+<form method="POST" action="/ilan/">
+{% csrf_token %}
+<p>Enter amount:</p>
+<input type="text" name="textfield">
+
+<button type="submit">Compute!</button>
+</form>
+
+<p>{{ amount_text }}</p>
+{% for icon in rows%}
+    <img style="width: 50px; height: 50px;" alt="Image description" src="{% static 'images/ub.png' %}"/>
+{% endfor %}
+
 </body>
 </html>
