@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'ilan.apps.IlanConfig',
     'paskoba.apps.PaskobaConfig',
     'django.contrib.admin',
     'django.contrib.auth',

@@ -30,4 +30,4 @@ def quarantine(request):
 
 def christmas(request):
     context = christmas_context()
-    return render(request, 'paskoba/christmas.html', context)
+    return render(request, 'paskoba/index.html', context)

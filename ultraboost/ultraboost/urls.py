@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('ultraboost/', include('ilan.urls')),
+    path('ilan/', include('ilan.urls')),
     path('today/', include('paskoba.urls')),
     path('admin/', admin.site.urls)
 ]
