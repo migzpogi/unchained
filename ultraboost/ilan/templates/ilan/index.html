@@ -2,11 +2,18 @@
 <html>
 <body>
 <form method="POST" action="/ilan/">
-{% csrf_token %}
-<p>Enter amount:</p>
-<input type="text" name="textfield">
+    {% csrf_token %}
+    <p>Enter amount:</p>
+    <input type="text" name="textfield">
 
-<button type="submit">Compute!</button>
+    <br>
+
+    <select name="currency">
+        <option selected="selected" value="ub">Ultraboost</option>
+        <option value="ps4">PS4</option>
+    </select>
+
+    <button type="submit">Compute!</button>
 </form>
 
 <p>{{ amount_text }}</p>

@@ -5,11 +5,17 @@ from .lib.ilan import Ilan
 
 def index(request):
     if request.method == 'POST':
+        currency = request.POST.get('currency', None)
+        if currency == 'ub':
+            price = 10000
+        if currency == 'ps4':
+            price = 20000
+
         data = request.POST.get('textfield', None)
         clean_data = Ilan().is_string_number_valid(data)
 
         if clean_data:
-            x = Ilan().get_qty(float(clean_data), 10000)
+            x = Ilan().get_qty(float(clean_data), price)
             context = {
                 # always convert to int
                 'amount': x,
