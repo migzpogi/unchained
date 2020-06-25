@@ -11,3 +11,8 @@ r3 = [2, 4, 6]
 r4 = [8, 5, 3, 9]
 rr = [r1, r2, r3, r4]
 
+
+def adjacent(i, row):
+    return row[i], row[i+1]
+
+print(adjacent(0, r2))
