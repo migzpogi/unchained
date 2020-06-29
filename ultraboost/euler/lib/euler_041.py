@@ -46,11 +46,15 @@ def is_pandigital(n):
         return False
 
 
-for x in reversed(range(2, 987654322)):
-    if is_pandigital(x):
-        if '0' in str(x):
-            print(x)
-        else:
-            print(x)
-            break
+for x in reversed(range(2, 7654322)):
+    if '0' in str(x) or '8' in str(x) or '9' in str(x):
+        continue
+    if x % 2 == 0:
+        continue
+    if not is_digits_unique(x):
+        continue
+    if is_prime(x):
+        print(x)
+        break
+
 
