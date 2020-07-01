@@ -1,59 +1,46 @@
 import itertools
 
-def get_ascii(c):
-    return ord(c)
+def decrypt(text, key):
+    """
+    Performs XOR on each character of the text to each character of the key (cycled)
+        text = [100, 101, 102, 103, 104]
+        key = [97, 98, 99]
+        100^97, 101^98, 102^99, 103^97, 104^98
+    :param [int] text: encrypted text in ascii list
+    :param [int] key: three character lower case keys
+    :return:
+    """
+    decrypted_text_in_ascii_list = []
+
+    paired = list(zip(text, itertools.cycle(key)))
+    for p in paired:
+        if 32 <= p[0]^p[1] <= 122:
+            decrypted_text_in_ascii_list.append(p[0]^p[1])
+        else:
+            return []
+
+    return decrypted_text_in_ascii_list
 
 
-def get_char(n):
-    return chr(n)
+def pretty_print_ascii_list(ascii_list):
+    pretty_string = ""
+    for a in ascii_list:
+        pretty_string += chr(a)
+
+    return pretty_string
 
 
-def convert(x):
-    converted = []
-    for i in x:
-        converted.append(i[0]^i[1])
-
-    return converted
-
-# print(get_ascii('a'))
-# print(get_char(97))
-# print(65^42)
-# print(107^42)
-#
-# key = [97, 97, 97]
-# orig = [36,22,80,0,0,4,23,25,19,17,88,4,4,19,21,11,88,22,23,23,29,69]
-# encrypted = [9, 7, 15, 13, 13]
-# pairs = list(zip(orig, itertools.cycle(key)))
-# print(convert(pairs))
-# pairs2 = list(zip(encrypted, itertools.cycle(key)))
-# z = convert(pairs2)
-#
-# for p in z:
-#     print(get_char(p), end='')
-
-
-keys = []
-for i in range(97,123):
+three_char_lower_case_keys = []
+for i in range(97, 123):
     for j in range(97, 123):
         for k in range(97, 123):
-            keys.append([i, j, k])
+            three_char_lower_case_keys.append([i, j, k])
 
 with open('p059_cipher.txt', 'r') as f:
     for lines in f.readlines():
-        orig = list(map(int, lines.strip().split(',')))
+        encrypted_text_in_ascii_list = list(map(int, lines.strip().split(',')))
 
-with open("p059_answers.txt", 'w') as r:
-    for k in keys:
-        key_pair = list(zip(orig, itertools.cycle(k)))
-        decrypted = convert(key_pair)
-        temp = []
-        will_write = True
-        for d in decrypted:
-            temp.append(get_char(d))
-
-
-        r.write(f'{k} - {"".join(temp)}' + "\n")
-
-
-
-
+for k in three_char_lower_case_keys:
+    decrypted_text_in_ascii_list = decrypt(encrypted_text_in_ascii_list, k)
+    if decrypted_text_in_ascii_list:
+        print(k, sum(decrypted_text_in_ascii_list), pretty_print_ascii_list(decrypted_text_in_ascii_list))
