@@ -1,15 +1,13 @@
 import math
-
-"""
-0123
-0132
-0213
-0231
-0312
-0321
+import time
 
 
-"""
+def convert_string_to_list(s):
+    string_in_list = []
+    for c in s:
+        string_in_list.append(c)
+
+    return string_in_list
 
 
 def get_total_number_of_permutations(n, r):
@@ -23,4 +21,84 @@ def get_total_number_of_permutations(n, r):
     return int(math.factorial(n) / math.factorial(n-r))
 
 
-print(get_total_number_of_permutations(4, 4))
+def shift_left(s, i):
+    if i > 0:
+        string_in_list = convert_string_to_list(s)
+        a, b = s[i], s[i-1]
+        string_in_list[i] = b
+        string_in_list[i-1] = a
+        return ''.join(string_in_list)
+    else:
+        return None
+
+
+x = 'ABCD'
+loops = get_total_number_of_permutations(4, 4)
+print(loops)
+
+permutations = ['ABCD']
+
+while len(permutations) < loops:
+    for i in reversed(range(0, len(x))):
+        shifted = shift_left(x, i)
+        print(shifted)
+        if shifted:
+            if shifted in permutations:
+                pass
+            else:
+                permutations.append(shifted)
+                x = shifted
+    print(permutations)
+    time.sleep(5)
+
+
+
+"""
+D
+
+ABDC x 
+ADBC x
+DABC x
+
+C
+
+DACB x
+DCAB x 
+CDAB x
+
+B
+
+CDBA x
+CBDA x
+BCDA x
+
+A
+
+BCAD x
+BACD x
+ABCD xy
+
+D
+BADC
+BDAC
+DBAC
+
+
+
+-----
+ABCD
+ABDC
+ADBC
+
+BCDA
+BCAD
+BACD
+
+CDBA
+CBDA
+CDAB
+
+DACB
+DCAB
+DABC
+"""
