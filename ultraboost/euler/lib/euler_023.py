@@ -1,26 +1,10 @@
 from functools import reduce
-
-
-def get_factors(n):
-
-    if n == 0:
-        return 0
-
-    ## this is the "mid point" factor of a number. if n = 25, the midpoint is 5 (1,5,5,25). stop there.
-    midpoint = int(n**0.5)
-
-    ## loops through 1 to midpoint, if n % factor == 0 then it means it is a divisor
-    ## we get that and also the n//factor
-    list_of_factors = ([factor, n//factor] for factor in range(1, midpoint+1) if n % factor == 0)
-
-    ## we combine all list_of_factors
-    total_factors = reduce((lambda a, b: a+b), list_of_factors)
-
-    return total_factors
-
+from leonhard.leonhard import get_factors_of_positive_integer
+from leonhard.leonhard import is_prime
 
 def get_proper_divisors(n):
-    return sorted(get_factors(n))[:-1]
+    return get_factors_of_positive_integer(n)[:-1]
+
 
 def get_status(n):
     total_of_proper_divisors = sum(get_proper_divisors(n))
@@ -31,5 +15,24 @@ def get_status(n):
     else:
         return 1
 
+limit = 28123
+abundant_numbers = []
+for i in range(1, limit):
+    if get_status(i) == 1:
+        abundant_numbers.append(i)
 
-print(get_proper_divisors(28))
+# print(abundant_numbers)
+
+sum_of_abundant_numbers = []
+for j in abundant_numbers:
+    sum_of_abundant_numbers.extend(list(map(lambda x: x+j if x+j < limit else None, abundant_numbers)))
+
+all_sum_abundant = list(set(sum_of_abundant_numbers))
+
+not_abundant = []
+for k in range(1, limit):
+    if k not in all_sum_abundant:
+        not_abundant.append(k)
+
+# print(not_abundant)
+print(sum(not_abundant))
