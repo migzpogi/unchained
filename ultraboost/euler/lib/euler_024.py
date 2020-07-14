@@ -1,5 +1,6 @@
 import math
 import time
+from itertools import permutations
 
 
 def convert_string_to_list(s):
@@ -31,74 +32,27 @@ def shift_left(s, i):
     else:
         return None
 
-
-x = 'ABCD'
-loops = get_total_number_of_permutations(4, 4)
-print(loops)
-
-permutations = ['ABCD']
-
-while len(permutations) < loops:
-    for i in reversed(range(0, len(x))):
-        shifted = shift_left(x, i)
-        print(shifted)
-        if shifted:
-            if shifted in permutations:
-                pass
-            else:
-                permutations.append(shifted)
-                x = shifted
-    print(permutations)
-    time.sleep(5)
+y = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+x = list(permutations(y))
+print(x[999999])
 
 
-
-"""
-D
-
-ABDC x 
-ADBC x
-DABC x
-
-C
-
-DACB x
-DCAB x 
-CDAB x
-
-B
-
-CDBA x
-CBDA x
-BCDA x
-
-A
-
-BCAD x
-BACD x
-ABCD xy
-
-D
-BADC
-BDAC
-DBAC
-
-
-
------
-ABCD
-ABDC
-ADBC
-
-BCDA
-BCAD
-BACD
-
-CDBA
-CBDA
-CDAB
-
-DACB
-DCAB
-DABC
-"""
+# x = 'ABCD'
+# loops = get_total_number_of_permutations(4, 4)
+# print(loops)
+#
+# permutations = ['ABCD']
+#
+# while len(permutations) < loops:
+#     for i in reversed(range(0, len(x))):
+#         shifted = shift_left(x, i)
+#         print(shifted)
+#         if shifted:
+#             if shifted in permutations:
+#                 pass
+#             else:
+#                 permutations.append(shifted)
+#                 x = shifted
+#     print(permutations)
+#     time.sleep(5)
+#
