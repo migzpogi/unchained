@@ -11,19 +11,17 @@ even-valued terms.
 """
 
 
-def fibonacci():
-    sequence = [1, 2]
+def generate_fibonacci_sequence(term_limit, first_term, second_term):
+    sequence = [first_term, second_term]
     while True:
-        next_num = sequence[-1] + sequence[-2]
-        if next_num < 4000000:
-            sequence.append(next_num)
+        next_number = sequence[-1] + sequence[-2]
+        if next_number < term_limit:
+            sequence.append(next_number)
         else:
             break
 
     return sequence
 
 
-print(fibonacci())
-print(sum([x for x in fibonacci() if x % 2 == 0]))
-
-
+four_m = generate_fibonacci_sequence(4000000, 1, 2)
+print(sum([n for n in four_m if n % 2 == 0]))
