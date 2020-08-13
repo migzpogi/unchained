@@ -19,7 +19,7 @@ def iter_to_num(i):
 
 even = [0, 2, 4, 6, 8]
 circular_primes = []
-for i in range(1, 1000001):
+for i in range(1, 101):
     if i == 1:
         continue
     if i == 2:
