@@ -17,5 +17,13 @@ def word_to_number(word):
     return sum_of_positions
 
 
+def is_triangular(n):
+    if (((8*n) + 1)**0.5) % 1 == 0:
+        return True
+    else:
+        return False
+
+
 print(generate_triange_sequence(10))
 print(word_to_number("SKY"))
+print(is_triangular(4))
