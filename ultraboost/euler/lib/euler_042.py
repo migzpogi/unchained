@@ -1,10 +1,5 @@
 import string
 
-
-def generate_triange_sequence(n):
-    return (n+1) * n * 0.5
-
-
 def word_to_number(word):
     word = word.lower()
     alphabet = list(string.ascii_lowercase)
@@ -16,7 +11,6 @@ def word_to_number(word):
 
     return sum_of_positions
 
-
 def is_triangular(n):
     if (((8*n) + 1)**0.5) % 1 == 0:
         return True
@@ -24,6 +18,30 @@ def is_triangular(n):
         return False
 
 
-print(generate_triange_sequence(10))
-print(word_to_number("SKY"))
-print(is_triangular(4))
+with open("p042_words.txt", 'r') as f:
+    for lines in f.readlines():
+        words = lines.strip()
+
+triangle_count = 0
+for w in words.split(","):
+    clean = w.replace('"', '')
+    value = word_to_number(clean)
+    if is_triangular(value):
+        triangle_count += 1
+
+print(triangle_count)
+
+
+def generate_triange_sequence(n):
+    return (n+1) * n * 0.5
+
+
+
+
+
+
+
+
+# print(generate_triange_sequence(10))
+# print(word_to_number("SKY"))
+# print(is_triangular(4))
