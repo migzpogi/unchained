@@ -1,0 +1,3 @@
+from leonhard.leonhard import get_factors_of_positive_integer
+
+print(get_factors_of_positive_integer(644))
