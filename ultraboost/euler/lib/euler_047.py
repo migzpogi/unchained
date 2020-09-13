@@ -6,7 +6,8 @@ def is_not_prime(n):
 
 
 def remove_one_and_last(n):
-    return n[1:-2]
+    return n[1:-1]
+
 
 
 factors = remove_one_and_last(get_factors_of_positive_integer(646))
@@ -22,7 +23,7 @@ if composites:
     for c in composites:
         print(c)
         temp = get_factors_of_positive_integer(c)
-        print(temp)
+        print(remove_one_and_last(temp))
         primes.extend(list(filter(is_prime, temp)))
         buffer.extend(list(filter(is_not_prime, temp)))
 
