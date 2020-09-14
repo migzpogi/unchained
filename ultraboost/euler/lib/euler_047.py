@@ -27,6 +27,8 @@ if composites:
         primes.extend(list(filter(is_prime, temp)))
         buffer.extend(list(filter(is_not_prime, temp)))
 
+        
+
 
 # x = map(is_prime, y)
 #
