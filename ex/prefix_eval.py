@@ -1,6 +1,34 @@
 import re
 valid_operators = ["+", "-", "*", "/"]
 
+def validate_expression(expression):
+    """
+    Checks if the given prefix expression is valid or not
+
+    Rules:
+        * Must be positive integers
+
+    Args:
+        expression str: prefix expression
+
+    Returns list: list of operators and operands, None if not valid
+
+    """
+
+    valid_operators = ["+", "-", "*", "/"]
+    valid_expression = []
+
+    for i in expression.split(" "):
+        if i in valid_operators:
+            valid_expression.append(i)
+            continue
+        try:
+            if int(i) > 0:
+                valid_expression.append(i)
+            else:
+                return None
+
+    return valid_expression
 
 def split_expression(expression):
     valid_exp = []
