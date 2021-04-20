@@ -1,72 +1,47 @@
 import re
 valid_operators = ["+", "-", "*", "/"]
 
-def validate_expression(expression):
+
+def evaluate_prefix(expression):
     """
-    Checks if the given prefix expression is valid or not
-
-    Rules:
-        * Must be positive integers
-
+    Evaluates the given prefix expression
+    Must be integers
+    
     Args:
-        expression str: prefix expression
+        expression str: mathematical expression to be evaluated in prefix notation
 
-    Returns list: list of operators and operands, None if not valid
+    Returns:
 
     """
-
-    valid_operators = ["+", "-", "*", "/"]
-    valid_expression = []
-
-    for i in expression.split(" "):
-        if i in valid_operators:
-            valid_expression.append(i)
-            continue
-        try:
-            if int(i) > 0:
-                valid_expression.append(i)
-            else:
-                return None
-
-    return valid_expression
-
-def split_expression(expression):
-    valid_exp = []
-    for i in expression.split(" "):
-        if i in valid_operators:
-            valid_exp.append(i)
-            continue
-        if i[0] == '0':
-            return None
-        try:
-            if int(i) > 0:
-                valid_exp.append(i)
-            else:
-                return None
-        except Exception:
-            valid_exp.append(i)
-
-    return " ".join(valid_exp)
-
-
-x = '+ + 1 * 2 3 4' # 11
-print(split_expression(x))
-
-
-def z(expression):
     while True:
-        m = re.search(r'([-+\/\*]) ([-]?\d+) ([-]?\d+)', expression)
-        if m:
-            ans = eval('%s %s %s' % (m.group(2), m.group(1), m.group(3)))
-            print(ans)
-            after = re.sub(r'([-+\/\*]) ([-]?\d+) ([-]?\d+)', str(ans), expression)
-            print(after)
-            n = re.search(r'([-+\/\*]) ([-]?\d+) ([-]?\d+)', after)
-            if n is None:
-                return ans
+        prefix_match = re.search(r'([-+\/\*]) ([-]?\d+) ([-]?\d+)', expression)  # searches the expression for operator-operand-operand
+        if prefix_match:
+            ans = eval('%s %s %s' % (prefix_match.group(2), prefix_match.group(1), prefix_match.group(3)))  # evaluate the matched pattern
+            substitute_ans = re.sub(r'([-+\/\*]) ([-]?\d+) ([-]?\d+)', str(ans), expression)  # substitute the answer to the expression
+
+            next = re.search(r'([-+\/\*]) ([-]?\d+) ([-]?\d+)', substitute_ans)
+            if next is None:
+                try:
+                    return int(substitute_ans)
+                except:
+                    return None
             else:
-                expression = after
+                expression = substitute_ans
         else:
             return None
 
-print(z(x))
+
+x = '+ + 1 * 2 3 4' # 11
+print(evaluate_prefix(x))
+
+x = '+ + 1 * 2 3 4 +' # None
+print(evaluate_prefix(x))
+
+x = '* - + 2 7 5 4' # 16
+print(evaluate_prefix(x))
+
+x = '- + 10 * 2 8 3' # 23
+print(evaluate_prefix(x))
+
+x = '/ * + 3 14 2 7' # 4
+print(evaluate_prefix(x))
