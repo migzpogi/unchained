@@ -1,7 +1,7 @@
 trigger:
-tags:
-  include:
-    - v*
+  tags:
+    include:
+      - v*
 
 jobs:
 - deployment: VMDeploy
