@@ -13,4 +13,4 @@ jobs:
     runOnce:
       deploy:
         steps:
-        - script: echo my first deployment
+        - script: ls
