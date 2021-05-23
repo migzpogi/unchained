@@ -32,4 +32,11 @@ stages:
           runOnce:
             deploy:
               steps:
-              - script: pwd
+              - task: CopyFiles@2
+                displayName: Copy unchained files
+                inputs:
+                  SourceFolder: $(Build.SourcesDirectory)
+                  Contents: '**'
+                  TargetFolder: $(Build.ArtifactStagingDirectory)
+                  CleanTargetFolder: true
+                  
