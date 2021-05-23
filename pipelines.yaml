@@ -3,14 +3,31 @@ trigger:
     include:
       - v*
 
-jobs:
-- deployment: VMDeploy
-  displayName: unchained
-  environment:
-    name: unchained
-    resourceType: VirtualMachine
-  strategy:
-    runOnce:
-      deploy:
+stages:
+  - stage: build
+    displayName: Build
+    jobs:
+      - job: build_job
+        displayName: Build Job
         steps:
-        - script: ls
+          - task: UsePythonVersion@0
+            inputs:
+              versionSpec: "3.x"
+            displayName: "Use Python 3.x"
+          - script: pwd
+  - stage: dev
+    displayName: Deploy to Dev
+    dependsOn:
+      - build
+    condition: succeeded()
+    jobs:
+      - deployment: VMDeploy
+        displayName: unchained
+        environment:
+          name: unchained
+          resourceType: VirtualMachine
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+              - script: pwd
