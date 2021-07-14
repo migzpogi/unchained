@@ -14,6 +14,10 @@ stages:
             inputs:
               versionSpec: "3.x"
             displayName: "Use Python 3.x"
+          - task: ArchiveFiles@2
+            inputs:
+              rootFolderOrFile: $(Build.SourcesDirectory)
+              archiveFile: $(Build.SourcesDirectory)/sample.zip
   - stage: dev
     displayName: Deploy to Dev
     dependsOn:
@@ -29,9 +33,6 @@ stages:
           runOnce:
             deploy:
               steps:
-              - task: ArchiveFiles@2
-                inputs:
-                  rootFolderOrFile: $(Build.SourcesDirectory)
               - task: CopyFiles@2
                 displayName: Copy unchained files
                 inputs:
