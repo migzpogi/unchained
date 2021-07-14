@@ -36,8 +36,11 @@ stages:
           runOnce:
             deploy:
               steps:
-              - download: current
-                artifact: sampleArtifact
+              - task: DownloadPipelineArtifact@2
+                inputs:
+                  source: current
+                  artifact: sampleArtifact
+                  path: "/home/pipelinedump"
 #              - task: CopyFiles@2
 #                displayName: Copy unchained files
 #                inputs:
