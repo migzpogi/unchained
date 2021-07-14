@@ -18,7 +18,7 @@ stages:
             inputs:
               rootFolderOrFile: $(Build.SourcesDirectory)
               archiveFile: $(Build.SourcesDirectory)/sample.zip
-          - pubish: $(Build.SourcesDirectory)/sample.zip
+          - publish: $(Build.SourcesDirectory)/sample.zip
             displayName: "Publishing artifact"
             artifact: sampleArtifact
   - stage: dev
