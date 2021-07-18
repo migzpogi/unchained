@@ -22,6 +22,8 @@ stages:
             displayName: "Publishing artifact"
             artifact: sampleArtifact
   - stage: dev
+    variables:
+      HomePath: "/home/pipelinedump"
     displayName: Deploy to Dev
     dependsOn:
       - build
@@ -36,15 +38,11 @@ stages:
           runOnce:
             deploy:
               steps:
+              - task: DeleteFiles@1
+                inputs:
+                  source: $(HomePath)
               - task: DownloadPipelineArtifact@2
                 inputs:
                   source: current
                   artifact: sampleArtifact
-                  path: "/home/pipelinedump"
-#              - task: CopyFiles@2
-#                displayName: Copy unchained files
-#                inputs:
-#                  SourceFolder: $(Build.SourcesDirectory)
-#                  Contents: '**'
-#                  TargetFolder: $(Build.ArtifactStagingDirectory)
-#                  CleanTargetFolder: true
+                  path: $(HomePath)
