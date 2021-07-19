@@ -27,8 +27,6 @@ stages:
             displayName: "Publishing artifact"
             artifact: $(UnchainedArtifactName)
   - stage: dev
-    variables:
-
     displayName: Deploy to Dev
     dependsOn:
       - build
