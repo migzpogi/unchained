@@ -3,6 +3,11 @@ trigger:
     include:
       - v*
 
+variables:
+  AgentDeployPath: "/home/pipelinedump"
+  UnchainedArchiveName: "unchained.zip"
+  UnchainedArtifactName: "unchainedArtifact"
+
 stages:
   - stage: build
     displayName: Build
@@ -17,13 +22,13 @@ stages:
           - task: ArchiveFiles@2
             inputs:
               rootFolderOrFile: $(Build.SourcesDirectory)
-              archiveFile: $(Build.SourcesDirectory)/sample.zip
-          - publish: $(Build.SourcesDirectory)/sample.zip
+              archiveFile: $(Build.SourcesDirectory)/$(UnchainedArchiveName)
+          - publish: $(Build.SourcesDirectory)/$(UnchainedArchiveName)
             displayName: "Publishing artifact"
-            artifact: sampleArtifact
+            artifact: $(UnchainedArtifactName)
   - stage: dev
     variables:
-      HomePath: "/home/pipelinedump"
+
     displayName: Deploy to Dev
     dependsOn:
       - build
@@ -40,9 +45,11 @@ stages:
               steps:
               - task: DeleteFiles@1
                 inputs:
-                  source: $(HomePath)
+                  source: $(AgentDeployPath)
+                  contents: |
+                    **/*
               - task: DownloadPipelineArtifact@2
                 inputs:
                   source: current
-                  artifact: sampleArtifact
-                  path: $(HomePath)
+                  artifact: $(UnchainedArtifactName)
+                  path: $(AgentDeployPath)
