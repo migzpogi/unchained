@@ -44,7 +44,7 @@ stages:
               - task: DeleteFiles@1
                 displayName: "Remove previously deployed files"
                 inputs:
-                  source: $(AgentDeployPath)
+                  SourceFolder: $(AgentDeployPath)
                   contents: |
                     **/*
               - task: DownloadPipelineArtifact@2
