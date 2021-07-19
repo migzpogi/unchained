@@ -4,7 +4,7 @@ trigger:
       - v*
 
 variables:
-  AgentDeployPath: "/home/pipelinedump"
+  AgentDeployPath: "/home/pipelinedump/"
   UnchainedArchiveName: "unchained.zip"
   UnchainedArtifactName: "unchainedArtifact"
 
@@ -42,11 +42,13 @@ stages:
             deploy:
               steps:
               - task: DeleteFiles@1
+                displayName: "Remove previously deployed files"
                 inputs:
                   source: $(AgentDeployPath)
                   contents: |
                     **/*
               - task: DownloadPipelineArtifact@2
+                displayName: "Downloading artifact"
                 inputs:
                   source: current
                   artifact: $(UnchainedArtifactName)
