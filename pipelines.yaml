@@ -57,3 +57,4 @@ stages:
                 inputs:
                   archiveFilePatterns: $(AgentDeployPath)/$(UnchainedArchiveName)
                   destinationFolder: $(AgentDeployPath)
+                  cleanDestinationFolder: false
