@@ -53,3 +53,7 @@ stages:
                   source: current
                   artifact: $(UnchainedArtifactName)
                   path: $(AgentDeployPath)
+              - task: ExtractFiles@1
+                inputs:
+                  archiveFilePatterns: $(AgentDeployPath)/$(UnchainedArchiveName)
+                  destinationFolder: $(AgentDeployPath)
